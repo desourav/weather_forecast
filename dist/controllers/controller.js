@@ -37,10 +37,6 @@ const getAllData = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
         });
         let currTemp = currentWeatherProps.temperature.value;
         let currentWindspeed = currentWeatherProps.windSpeed.value;
-        // console.log(currIcon);
-        console.log(`current temperature: ${currTemp}`);
-        console.log(`current weather description: ${currDesc}`);
-        console.log(`current wind speed: ${currentWindspeed}`);
         let forecastArray = weatherArray.properties.periods;
         for (let i = 0; i < forecastArray.length; i++) {
             let dailyWeather = {
@@ -59,11 +55,7 @@ const getAllData = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
             jsonData: weather,
             stockArray: stockArray,
             stockData: stockPriceData,
-            worldNews: worldNews,
-            currIcon: currIcon,
-            currDesc: currDesc,
-            currTemp: currTemp,
-            currentWindspeed: currentWindspeed
+            worldNews: worldNews
         });
     }
     catch (error) {

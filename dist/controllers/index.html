@@ -14,7 +14,7 @@
     <title>This week in brief</title>
 </head>
 <body>
-    <img src=<% currIcon %>>
+    <span id="clock" style="font-size: xx-large;position: absolute; bottom: 0; left: 0;font-family:Arial, Helvetica, sans-serif;"></span>
     <span id="datetime" style="font-size: small;position: absolute; top: 0; right: 0;"></span>
     <p> <% jsonData %> </p> 
     <table id="weatherTable" border="1">
@@ -87,6 +87,9 @@
                 document.location.reload();
             }, millisecondsBeforeRefresh);
         };
+        window.addEventListener("load", () => {
+            clock();
+        });
 
         function getWeatherColor(temp)
             {
@@ -155,6 +158,61 @@
 
         // Insert date and time into HTML
         document.getElementById("datetime").innerHTML = datetime;
+
+        function clock() {
+            const today = new Date();
+        
+            // get time components
+            const hours = today.getHours();
+            const minutes = today.getMinutes();
+            const seconds = today.getSeconds();
+        
+            //add '0' to hour, minute & second when they are less 10
+            const hour = hours < 10 ? "0" + hours : hours;
+            const minute = minutes < 10 ? "0" + minutes : minutes;
+            const second = seconds < 10 ? "0" + seconds : seconds;
+        
+            //make clock a 12-hour time clock
+            const hourTime = hour > 12 ? hour - 12 : hour;
+        
+            // if (hour === 0) {
+            //   hour = 12;
+            // }
+            //assigning 'am' or 'pm' to indicate time of the day
+            const ampm = hour < 12 ? "AM" : "PM";
+        
+            // get date components
+            const month = today.getMonth();
+            const year = today.getFullYear();
+            const day = today.getDate();
+        
+            //declaring a list of all months in  a year
+            const monthList = [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December"
+            ];
+        
+            //get current date and time
+            const date = monthList[month] + " " + day + ", " + year;
+            const time = hourTime + ":" + minute + ":" + second + ampm;
+        
+            //combine current date and time
+            const dateTime = date + " - " + time;
+        
+            //print current date and time to the DOM
+            document.getElementById("clock").innerHTML = dateTime;
+            setTimeout(clock, 1000);
+    }
     </script>
 </body>
 </html>
