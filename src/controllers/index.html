@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<style type="text/css">
+    table {
+        /* border-collapse: collapse; */
+        border: 5px solid gray;
+        /* width: calc(50% - 10px); */
+        /* float: left; */
+        margin: 5px;
+        font-size: large;
+    }
+</style>
+<head>
+    <title>This week in brief</title>
+</head>
+<body>
+    <p> <% jsonData %> </p> 
+    <table id="weatherTable" border="1">
+        <thead>
+            <tr>
+                <th style="background-color: lightblue;">Name</th>
+                <th style="background-color: lightblue;">Temperature (C)</th>
+                <th style="background-color: lightblue;">WindSpeed</th>
+                <th style="background-color: lightblue;">ShortForecast</th>
+                <th style="background-color: lightblue;">DetailedForecast</th>
+            </tr>
+            <% for (var i = 0 ; i < jsonData.length ; i++) { %>
+                <tr>
+                    <td><%= jsonData[i].name %></td>
+                    <td><%= jsonData[i].temperature %></td>
+                    <td><%= jsonData[i].windSpeed %></td>
+                    <td><%= jsonData[i].shortForecast %></td>
+                    <td><%= jsonData[i].detailedForecast %></td>
+                </tr>
+                <% } %>
+        </thead>
+    </table>
+    <p> <% stockData %> </p> 
+    <p> <% stockArray %> </p> 
+    <table id="stockExchange" border="1">
+        <thead>
+            <tr>
+                <th style="background-color: rgb(126, 223, 126);">Ticker Symbol</th>
+                <th style="background-color: rgb(126, 223, 126);">Current price</th>
+                <th style="background-color: rgb(126, 223, 126);">Change</th>
+                <th style="background-color: rgb(126, 223, 126);">% Change</th>
+                <th style="background-color: rgb(126, 223, 126);">High price of the day</th>
+                <th style="background-color: rgb(126, 223, 126);">Low price of the day</th>
+                <th style="background-color: rgb(126, 223, 126);">Open price of the day</th>
+                <th style="background-color: rgb(126, 223, 126);">Previous close price</th>
+            </tr>
+            <% for (var i = 0 ; i < stockData.length ; i++) { %>
+                <tr>
+                    <td><%= stockArray[i] %></td>
+                    <td> <%= stockData[i].c %></td>
+                    <td><%= stockData[i].d %></td>
+                    <td><%= stockData[i].dp %></td>
+                    <td><%= stockData[i].h %></td>
+                    <td><%= stockData[i].l %></td>
+                    <td><%= stockData[i].o %></td>
+                    <td><%= stockData[i].pc %></td>
+                </tr>
+                <% } %>
+        </thead>
+    </table>
+    <p> <% worldNews %> </p> 
+    <table id="worldNews" border="1">
+        <thead>
+            <tr>
+                <th style="background-color: rgb(198, 198, 48);">Top News</th>
+            </tr>
+            <% for (var i = 0 ; i < worldNews.length ; i++) { %>
+                <tr>
+                    <td><%= worldNews[i] %></td>
+                </tr>
+                <% } %>
+        </thead>
+    </table>
+    <script type="text/javascript">
+        //put this somewhere in "show.html"
+        //using window onload event to run function
+        //so function runs after all content has been loaded.
+        //After refresh this entire script will run again.
+        window.onload = function () {
+            'use strict';
+            var millisecondsBeforeRefresh = 900000; //Adjust time here (eg every 15mins)
+            window.setTimeout(function () {
+                //refresh the entire document
+                document.location.reload();
+            }, millisecondsBeforeRefresh);
+        };
+
+        function getWeatherColor(temp)
+            {
+                var background="white";
+                if(temp<4)
+                    {
+                        background="lightgray";
+                    }
+                else if(temp>=4 && temp<15)
+                    {
+
+                        background="lightblue";
+                    }
+                else if(temp>=15 && temp<24)
+                    {
+                        background="lightyellow";
+                    }
+                else background="lightpink";
+                return background;   
+            };
+
+
+        function getStockColor(pc) {
+            if (pc < -1) {
+                    background="lightsalmon";
+                }
+            else if ((pc > -1) && (pc < 0)) {
+                    background="lightpink";
+                }
+            else if ((pc > 0) && (pc < 1)) {
+                    background="lightseagreen";
+                }
+            else background="lightgreen";
+            return background;  
+        };
+
+
+        var t = document.getElementById('weatherTable');
+        if (t) {
+            Array.from(t.rows).forEach((tr, rowIdx) => {
+				Array.from(tr.cells).forEach((cell, cellIdx) => {
+                    if (cellIdx == 1 && rowIdx != 0) {
+                        var color = getWeatherColor(parseInt(cell.innerText));
+                        cell.style.backgroundColor = color;
+                    }
+				});
+			});
+		};
+
+        var t2 = document.getElementById('stockExchange');
+        if (t2) {
+            Array.from(t2.rows).forEach((tr, rowIdx) => {
+				Array.from(tr.cells).forEach((cell, cellIdx) => {
+                    if (cellIdx == 3 && rowIdx != 0) {
+                        var pc = parseFloat(cell.innerText);
+                        var colorStock = getStockColor(pc);
+                        cell.style.backgroundColor = colorStock;
+                    }
+				});
+			});
+		}
+    </script>
+</body>
+</html>
