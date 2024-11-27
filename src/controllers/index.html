@@ -14,7 +14,7 @@
     <title>This week in brief</title>
 </head>
 <body>
-    <span id="clock" style="font-size: xx-large;position: absolute; bottom: 0; left: 0;font-family:Arial, Helvetica, sans-serif;"></span>
+    <span id="clock" style="font-size: small;position: absolute; bottom: 0; right: 0;font-family:Arial, Helvetica, sans-serif;"></span>
     <span id="datetime" style="font-size: small;position: absolute; top: 0; right: 0;"></span>
     <p> <% jsonData %> </p> 
     <table id="weatherTable" border="1">
@@ -37,41 +37,54 @@
                 <% } %>
         </thead>
     </table>
-    <p> <% stockData %> </p> 
-    <p> <% stockArray %> </p> 
-    <table id="stockExchange" border="1" style="border: 1; float: left; ">
+    <div>
+        <p> <% stockData %> </p> 
+        <p> <% stockArray %> </p> 
+        <table id="stockExchange" border="1" style="border: 1; float: left; ">
+            <thead>
+                <tr>
+                    <th style="background-color: rgb(126, 223, 126);">Ticker Symbol</th>
+                    <th style="background-color: rgb(126, 223, 126);">Current price</th>
+                    <th style="background-color: rgb(126, 223, 126);">Change</th>
+                    <th style="background-color: rgb(126, 223, 126);">% Change</th>
+                    <th style="background-color: rgb(126, 223, 126);">Open price of the day</th>
+                    <th style="background-color: rgb(126, 223, 126);">Previous close price</th>
+                </tr>
+                <% for (var i = 0 ; i < stockData.length ; i++) { %>
+                    <tr>
+                        <td><%= stockArray[i] %></td>
+                        <td> <%= stockData[i].c %></td>
+                        <td><%= stockData[i].d %></td>
+                        <td><%= stockData[i].dp %></td>
+                        <td><%= stockData[i].o %></td>
+                        <td><%= stockData[i].pc %></td>
+                    </tr>
+                    <% } %>
+            </thead>
+        </table>
+        <p> <% worldNews %> </p> 
+        <table id="worldNews" border="1"">
+            <thead>
+                <tr>
+                    <th style="background-color: rgb(198, 198, 48);">Top News</th>
+                </tr>
+                <% for (var i = 0 ; i < worldNews.length ; i++) { %>
+                    <tr>
+                        <td><%= worldNews[i] %></td>
+                    </tr>
+                    <% } %>
+            </thead>
+        </table>
+    </div>
+    <table id="currentWeather" border="1" style="position: absolute; left: 0; bottom: 0;">
         <thead>
             <tr>
-                <th style="background-color: rgb(126, 223, 126);">Ticker Symbol</th>
-                <th style="background-color: rgb(126, 223, 126);">Current price</th>
-                <th style="background-color: rgb(126, 223, 126);">Change</th>
-                <th style="background-color: rgb(126, 223, 126);">% Change</th>
-                <th style="background-color: rgb(126, 223, 126);">Open price of the day</th>
-                <th style="background-color: rgb(126, 223, 126);">Previous close price</th>
+                <th style="background-color: rgb(230, 143, 143);">Current Weather</th>
             </tr>
-            <% for (var i = 0 ; i < stockData.length ; i++) { %>
-                <tr>
-                    <td><%= stockArray[i] %></td>
-                    <td> <%= stockData[i].c %></td>
-                    <td><%= stockData[i].d %></td>
-                    <td><%= stockData[i].dp %></td>
-                    <td><%= stockData[i].o %></td>
-                    <td><%= stockData[i].pc %></td>
-                </tr>
-                <% } %>
-        </thead>
-    </table>
-    <p> <% worldNews %> </p> 
-    <table id="worldNews" border="1">
-        <thead>
-            <tr>
-                <th style="background-color: rgb(198, 198, 48);">Top News</th>
-            </tr>
-            <% for (var i = 0 ; i < worldNews.length ; i++) { %>
-                <tr>
-                    <td><%= worldNews[i] %></td>
-                </tr>
-                <% } %>
+            <tr><td style="text-align: center;"><img src= <%= currIcon %>></td></tr>
+            <tr><td style="text-align: center; font-size: x-large;"><%= currDescription %></td></tr>
+            <tr><td style="text-align: center; font-size: x-large;"><%= "Temperature: " + currTemp + " °C" %></td></tr>
+            <tr><td style="text-align: center; font-size: x-large;"><%= "Windspeed: " + currWindspeed + " km/h" %></td></tr>
         </thead>
     </table>
     <script type="text/javascript">

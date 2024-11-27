@@ -29,14 +29,13 @@ const getAllData = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
         let weatherArray = yield fetchNWSData(geoJSONData.properties.forecast + "?units=si");
         let currentWeather = yield fetchNWSData("https://api.weather.gov/stations/KHPN/observations"); // nearest weather station: HPN airport
         let currentWeatherProps = currentWeather.features[0].properties;
-        let currIcon = currentWeatherProps.icon;
-        let currDesc = "";
-        currentWeatherProps.presentWeather.map((w) => {
-            currDesc = currDesc + (w.intensity != null ? w.intensity + " " : " ");
-            currDesc = currDesc + (w.weather != null ? w.weather + " " : " ");
-        });
+        // console.log(currentWeatherProps);
+        let currIcon = currentWeatherProps.icon.replace("medium", "large");
+        // console.log(currentWeatherProps.icon);
+        // console.log(currIcon);
         let currTemp = currentWeatherProps.temperature.value;
-        let currentWindspeed = currentWeatherProps.windSpeed.value;
+        let currDescription = currentWeatherProps.textDescription;
+        let currWindspeed = currentWeatherProps.windSpeed.value == null ? "unknown" : currentWeatherProps.windSpeed.value;
         let forecastArray = weatherArray.properties.periods;
         for (let i = 0; i < forecastArray.length; i++) {
             let dailyWeather = {
@@ -55,7 +54,11 @@ const getAllData = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
             jsonData: weather,
             stockArray: stockArray,
             stockData: stockPriceData,
-            worldNews: worldNews
+            worldNews: worldNews,
+            currTemp: currTemp,
+            currWindspeed: currWindspeed,
+            currIcon: currIcon,
+            currDescription: currDescription
         });
     }
     catch (error) {
