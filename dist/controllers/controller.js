@@ -27,7 +27,7 @@ const getAllData = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
         let baseURL = "https://api.weather.gov/points/" + lat + "," + long;
         let geoJSONData = yield fetchNWSData(baseURL);
         let weatherArray = yield fetchNWSData(geoJSONData.properties.forecast + "?units=si");
-        let currentWeather = yield fetchNWSData("https://api.weather.gov/stations/KHPN/observations"); // nearest weather station: HPN airport
+        let currentWeather = yield fetchNWSData("https://api.weather.gov/stations/KDXR/observations"); // nearest weather station: Danbury Airport
         let currentWeatherProps = currentWeather.features[0].properties;
         // console.log(currentWeatherProps);
         let currIcon = currentWeatherProps.icon.replace("medium", "large");
