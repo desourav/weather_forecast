@@ -3,5 +3,6 @@ export interface WeatherInterface {
     "temperature": string,
     "windSpeed": string,
     "shortForecast": string,
-    "detailedForecast": string
+    "detailedForecast": string,
+    "icon": string
 }

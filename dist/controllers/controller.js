@@ -40,11 +40,12 @@ const getAllData = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
         let forecastArray = weatherArray.properties.periods;
         for (let i = 0; i < forecastArray.length; i++) {
             let dailyWeather = {
-                "name": forecastArray[i].name,
+                "name": forecastArray[i].name.replace("This", "").replace("Day", "AM").replace("Night", "PM"),
                 "temperature": forecastArray[i].temperature,
                 "windSpeed": forecastArray[i].windSpeed,
                 "shortForecast": forecastArray[i].shortForecast,
-                "detailedForecast": forecastArray[i].detailedForecast
+                "detailedForecast": forecastArray[i].detailedForecast,
+                "icon": forecastArray[i].icon.replace("medium", "large")
             };
             weather.push(dailyWeather);
         }
