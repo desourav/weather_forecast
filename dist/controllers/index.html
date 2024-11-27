@@ -22,13 +22,13 @@
     <p> <% jsonData %> </p> 
     <!-- <table id="weatherTable" border="1"> -->
             <% for (var i = 0 ; i < jsonData.length ; i++) { %>
-                <table border="1" style="float: left; height: 300px;">
+                <table border="1" style="float: left; height: 250px;">
                     <thead>
-                        <tr><th style="text-align: center; font-weight: bold ; width: 150px;"><%= jsonData[i].name %></th></tr>
-                        <tr><td style="text-align: center; vertical-align: bottom;" width="100%" height="100%"><img src= <%= jsonData[i].icon %>></td></tr>
-                        <tr><td style="text-align: center; width: 120px;"><%= jsonData[i].temperature + " °C"%></td></tr>
-                        <tr><td style="text-align: center; width: 120px;"><%= jsonData[i].windSpeed %></td></tr>
-                        <tr><td style="text-align: center; font-size: medium; width: 120px; height: 40px;"><%= jsonData[i].shortForecast %></td></tr>
+                        <tr><th style="text-align: center; font-weight: bold; font-size: small; width: 105px"><%= jsonData[i].name %></th></tr>
+                        <tr><td style="text-align: center; vertical-align: bottom;"><img src= <%= jsonData[i].icon %>></td></tr>
+                        <tr><td style="text-align: center; width: 105px"><%= jsonData[i].temperature + " °C"%></td></tr>
+                        <tr><td style="text-align: center; width: 105px"><%= jsonData[i].windSpeed %></td></tr>
+                        <tr style="height: 80px"><td style="text-align: center; font-size: small; width: 105px;x"><%= jsonData[i].shortForecast %></td></tr>
                     </thead>
                 </table>
                 <% } %>

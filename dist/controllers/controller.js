@@ -45,7 +45,7 @@ const getAllData = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
                 "windSpeed": forecastArray[i].windSpeed,
                 "shortForecast": forecastArray[i].shortForecast,
                 "detailedForecast": forecastArray[i].detailedForecast,
-                "icon": forecastArray[i].icon.replace("medium", "large")
+                "icon": forecastArray[i].icon
             };
             weather.push(dailyWeather);
         }
