@@ -26,9 +26,10 @@ export const getAllData = async (req: Request, res: Response, next: NextFunction
         // console.log(currentWeatherProps.icon);
         // console.log(currIcon);
 
-        let currTemp = currentWeatherProps.temperature.value;
+        let currTemp = parseFloat(currentWeatherProps.temperature.value).toFixed(1);
         let currDescription = currentWeatherProps.textDescription;
-        let currWindspeed = currentWeatherProps.windSpeed.value == null ? "unknown" : currentWeatherProps.windSpeed.value;
+        let currWindspeed = currentWeatherProps.windSpeed.value == null ? "unknown" : parseFloat(currentWeatherProps.windSpeed.value).toFixed(1);
+        let currFeelsLike = currentWeatherProps.windChill.value == null ? "unknown" : parseFloat(currentWeatherProps.windChill.value).toFixed(1)
 
 
         let forecastArray = weatherArray.properties.periods;
@@ -54,7 +55,8 @@ export const getAllData = async (req: Request, res: Response, next: NextFunction
             currTemp: currTemp,
             currWindspeed: currWindspeed,
             currIcon: currIcon,
-            currDescription: currDescription
+            currDescription: currDescription,
+            currFeelsLike: currFeelsLike
         });
         
     } catch (error) {

@@ -33,9 +33,10 @@ const getAllData = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
         let currIcon = currentWeatherProps.icon.replace("medium", "large");
         // console.log(currentWeatherProps.icon);
         // console.log(currIcon);
-        let currTemp = currentWeatherProps.temperature.value;
+        let currTemp = parseFloat(currentWeatherProps.temperature.value).toFixed(1);
         let currDescription = currentWeatherProps.textDescription;
-        let currWindspeed = currentWeatherProps.windSpeed.value == null ? "unknown" : currentWeatherProps.windSpeed.value;
+        let currWindspeed = currentWeatherProps.windSpeed.value == null ? "unknown" : parseFloat(currentWeatherProps.windSpeed.value).toFixed(1);
+        let currFeelsLike = currentWeatherProps.windChill.value == null ? "unknown" : parseFloat(currentWeatherProps.windChill.value).toFixed(1);
         let forecastArray = weatherArray.properties.periods;
         for (let i = 0; i < forecastArray.length; i++) {
             let dailyWeather = {
@@ -58,7 +59,8 @@ const getAllData = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
             currTemp: currTemp,
             currWindspeed: currWindspeed,
             currIcon: currIcon,
-            currDescription: currDescription
+            currDescription: currDescription,
+            currFeelsLike: currFeelsLike
         });
     }
     catch (error) {
