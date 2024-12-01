@@ -37,7 +37,7 @@ const getAllData = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
         let currDescription = currentWeatherProps.textDescription;
         let currWindspeed = currentWeatherProps.windSpeed.value == null ? "unknown" : parseFloat(currentWeatherProps.windSpeed.value).toFixed(1);
         let currFeelsLike = currentWeatherProps.windChill.value == null ? "unknown" : parseFloat(currentWeatherProps.windChill.value).toFixed(1);
-        let forecastArray = weatherArray.properties.periods;
+        let forecastArray = weatherArray.properties.periods == undefined ? [] : weatherArray.properties.periods;
         for (let i = 0; i < forecastArray.length; i++) {
             let dailyWeather = {
                 "name": forecastArray[i].name.replace("This", "").replace("Day", "AM").replace("Night", "PM"),
