@@ -40,7 +40,7 @@ export const getAllData = async (req: Request, res: Response, next: NextFunction
                 "windSpeed": forecastArray[i].windSpeed,
                 "shortForecast": forecastArray[i].shortForecast,
                 "detailedForecast": forecastArray[i].detailedForecast,
-                "icon": forecastArray[i].icon.replace("medium", "large")
+                "icon": forecastArray[i].icon
             }
             weather.push(dailyWeather);
         }
