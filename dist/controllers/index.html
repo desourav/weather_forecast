@@ -9,19 +9,21 @@
         margin: 5px;
         font-size: medium;
     }
-    body {
-        background-color: rgba(216, 216, 216, 0.659);
-    }
     img {
         width: 100%;
         display: block;
+    }
+    body {
+        background-image: url(mountains.jpeg);
+        background-size: contain;
+        background-repeat: no-repeat;
     }
 </style>
 <head>
     <title>This week in brief</title>
 </head>
 <body>
-    <span id="clock" style="font-size: x-large;position: absolute; bottom: 0; left: 0;font-family:Arial, Helvetica, sans-serif;"></span>
+    <span id="clock" style="font-size: x-large;position: absolute; bottom: 0; left: 0;font-family:Arial, Helvetica, sans-serif; color: whitesmoke;"></span>
     <span id="datetime" style="font-size: small;position: absolute; top: 0; right: 0;"></span>
     <p> <% jsonData %> </p> 
     <!-- <table id="weatherTable" border="1"> -->
@@ -43,12 +45,12 @@
         <table id="stockExchange" border="1" style="border: 1; float: left; ">
             <thead>
                 <tr>
-                    <th style="background-color: rgb(126, 223, 126);">Ticker Symbol</th>
-                    <th style="background-color: rgb(126, 223, 126);">Current price</th>
-                    <th style="background-color: rgb(126, 223, 126);">Change</th>
-                    <th style="background-color: rgb(126, 223, 126);">% Change</th>
-                    <th style="background-color: rgb(126, 223, 126);">Open price of the day</th>
-                    <th style="background-color: rgb(126, 223, 126);">Previous close price</th>
+                    <th>Ticker Symbol</th>
+                    <th>Current price</th>
+                    <th>Change</th>
+                    <th>% Change</th>
+                    <th>Open price of the day</th>
+                    <th>Previous close price</th>
                 </tr>
                 <% for (var i = 0 ; i < stockData.length ; i++) { %>
                     <tr>
@@ -66,7 +68,7 @@
         <table id="worldNews" border="1"">
             <thead>
                 <tr>
-                    <th style="background-color: rgb(198, 198, 48);">Top News</th>
+                    <th>Top News</th>
                 </tr>
                 <% for (var i = 0 ; i < worldNews.length ; i++) { %>
                     <tr>
@@ -79,13 +81,13 @@
     <table id="currentWeather" border="1" style="position: absolute; right: 0; bottom: 0;">
         <thead>
             <tr>
-                <th style="background-color: rgb(230, 143, 143);">Current Weather</th>
+                <th>Current Weather</th>
             </tr>
             <tr><td style="text-align: center;"><img src= <%= currIcon %>></td></tr>
-            <tr><td style="text-align: center; font-size: x-large;"><%= currDescription %></td></tr>
-            <tr><td style="text-align: center; font-size: x-large;"><%= "Temp: " + currTemp + " °C" %></td></tr>
-            <tr><td style="text-align: center; font-size: x-large;"><%= "Feels: " + currFeelsLike + " °C" %></td></tr>
-            <tr><td style="text-align: center; font-size: x-large;"><%= "Wind: " + currWindspeed + " km/h" %></td></tr>
+            <tr><td style="text-align: center; font-size: x-large;color: whitesmoke;"><%= currDescription %></td></tr>
+            <tr><td style="text-align: center; font-size: x-large;color: whitesmoke;"><%= "Temp: " + currTemp + " °C" %></td></tr>
+            <tr><td style="text-align: center; font-size: x-large;color: whitesmoke;"><%= "Feels: " + currFeelsLike + " °C" %></td></tr>
+            <tr><td style="text-align: center; font-size: x-large;color: whitesmoke;"><%= "Wind: " + currWindspeed + " km/h" %></td></tr>
             
         </thead>
     </table>
