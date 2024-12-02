@@ -79,12 +79,14 @@ function getWorldnews() {
             // q: 'stocks',
             country: 'us',
             // category: 'business',
-            pageSize: 20,
+            pageSize: 25,
             page: 1,
         });
         let worldNews = [];
         topHeadlines.articles.forEach((news => {
-            worldNews.push(news.title);
+            if (!news.title.includes("Removed")) {
+                worldNews.push(news.title);
+            }
         }));
         return worldNews;
     });
