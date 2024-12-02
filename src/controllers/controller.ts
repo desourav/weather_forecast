@@ -32,7 +32,7 @@ export const getAllData = async (req: Request, res: Response, next: NextFunction
         let currFeelsLike = currentWeatherProps.windChill.value == null ? "unknown" : parseFloat(currentWeatherProps.windChill.value).toFixed(1)
 
 
-        let forecastArray = weatherArray.properties.periods == undefined ? [] : weatherArray.properties.periods;
+        let forecastArray = weatherArray.properties == undefined ? [] : weatherArray.properties.periods;
         for (let i = 0; i < forecastArray.length; i++) {
             let dailyWeather: WeatherInterface = {
                 "name": forecastArray[i].name.replace("This", "").replace("Day", "AM").replace("Night", "PM"),
@@ -78,12 +78,14 @@ async function getWorldnews() :Promise<any>{
         // q: 'stocks',
         country: 'us',
         // category: 'business',
-        pageSize: 20,
+        pageSize: 25,
         page: 1,
     });
     let worldNews: any[] = [];
     topHeadlines.articles.forEach((news => {
-        worldNews.push(news.title);
+        if (!news.title.includes("Removed")) {
+            worldNews.push(news.title);
+        }
     }))
 
     return worldNews;
