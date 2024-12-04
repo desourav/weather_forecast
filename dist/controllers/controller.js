@@ -29,14 +29,14 @@ const getAllData = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
         let weatherArray = yield fetchNWSData(geoJSONData.properties.forecast + "?units=si");
         let currentWeather = yield fetchNWSData("https://api.weather.gov/stations/KDXR/observations"); // nearest weather station: Danbury Airport
         let currentWeatherProps = currentWeather.features[0].properties;
-        // console.log(currentWeatherProps);
-        let currIcon = currentWeatherProps.icon.replace("medium", "large");
-        // console.log(currentWeatherProps.icon);
-        // console.log(currIcon);
-        let currTemp = parseFloat(currentWeatherProps.temperature.value).toFixed(1);
-        let currDescription = currentWeatherProps.textDescription;
-        let currWindspeed = currentWeatherProps.windSpeed.value == null ? "unknown" : parseFloat(currentWeatherProps.windSpeed.value).toFixed(1);
-        let currFeelsLike = currentWeatherProps.windChill.value == null ? "unknown" : parseFloat(currentWeatherProps.windChill.value).toFixed(1);
+        let currIcon = "n/a", currTemp = "n/a", currDescription = "n/a", currWindspeed = "n/a", currFeelsLike = "n/a";
+        if (currentWeatherProps != undefined) {
+            currIcon = currentWeatherProps.icon.replace("medium", "large");
+            currTemp = parseFloat(currentWeatherProps.temperature.value).toFixed(1);
+            currDescription = currentWeatherProps.textDescription;
+            currWindspeed = currentWeatherProps.windSpeed.value == null ? "unknown" : parseFloat(currentWeatherProps.windSpeed.value).toFixed(1);
+            currFeelsLike = currentWeatherProps.windChill.value == null ? "unknown" : parseFloat(currentWeatherProps.windChill.value).toFixed(1);
+        }
         let forecastArray = weatherArray.properties == undefined ? [] : weatherArray.properties.periods;
         for (let i = 0; i < forecastArray.length; i++) {
             let dailyWeather = {
@@ -52,6 +52,7 @@ const getAllData = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
         let stockArray = ['SPY', 'AAPL', 'GOOGL', 'NVDA', 'META', 'IBM', 'MSFT', 'TSLA', 'VOO', 'VUG', 'VGT', 'VTWO', 'VOT'];
         let stockPriceData = yield getStockPrice(stockArray);
         let worldNews = yield getWorldnews();
+        worldNews = (worldNews == undefined) ? [] : worldNews;
         res.status(200).render(__dirname + "/index.html", {
             jsonData: weather,
             stockArray: stockArray,
@@ -74,21 +75,26 @@ function getWorldnews() {
     return __awaiter(this, void 0, void 0, function* () {
         const apiKey = 'aa8b64e86aa9434eb08b9e0021139221';
         const newsAPI = new ts_newsapi_1.default(apiKey);
-        // Top and breaking headlines  
-        const topHeadlines = yield newsAPI.getTopHeadlines({
-            // q: 'stocks',
-            country: 'us',
-            // category: 'business',
-            pageSize: 25,
-            page: 1,
-        });
-        let worldNews = [];
-        topHeadlines.articles.forEach((news => {
-            if (!news.title.includes("Removed")) {
-                worldNews.push(news.title);
-            }
-        }));
-        return worldNews;
+        try {
+            // Top and breaking headlines  
+            const topHeadlines = yield newsAPI.getTopHeadlines({
+                // q: 'stocks',
+                country: 'us',
+                // category: 'business',
+                pageSize: 25,
+                page: 1,
+            });
+            let worldNews = [];
+            topHeadlines.articles.forEach((news => {
+                if (!news.title.includes("Removed")) {
+                    worldNews.push(news.title);
+                }
+            }));
+            return worldNews;
+        }
+        catch (error) {
+            throw new Error("getWorldnews: Network response was not ok");
+        }
     });
 }
 function fetchNWSData(url) {
@@ -99,7 +105,7 @@ function fetchNWSData(url) {
             return json;
         }
         catch (error) {
-            throw new Error("Network response was not ok");
+            throw new Error("fetchNWSData: Network response was not ok");
         }
     });
 }

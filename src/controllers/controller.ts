@@ -21,16 +21,14 @@ export const getAllData = async (req: Request, res: Response, next: NextFunction
 
         let currentWeather = await fetchNWSData("https://api.weather.gov/stations/KDXR/observations"); // nearest weather station: Danbury Airport
         let currentWeatherProps = currentWeather.features[0].properties;
-        // console.log(currentWeatherProps);
-        let currIcon = currentWeatherProps.icon.replace("medium", "large");
-        // console.log(currentWeatherProps.icon);
-        // console.log(currIcon);
-
-        let currTemp = parseFloat(currentWeatherProps.temperature.value).toFixed(1);
-        let currDescription = currentWeatherProps.textDescription;
-        let currWindspeed = currentWeatherProps.windSpeed.value == null ? "unknown" : parseFloat(currentWeatherProps.windSpeed.value).toFixed(1);
-        let currFeelsLike = currentWeatherProps.windChill.value == null ? "unknown" : parseFloat(currentWeatherProps.windChill.value).toFixed(1)
-
+        let currIcon = "n/a", currTemp = "n/a", currDescription = "n/a", currWindspeed = "n/a", currFeelsLike = "n/a";
+        if (currentWeatherProps != undefined) {
+            currIcon = currentWeatherProps.icon.replace("medium", "large");
+            currTemp = parseFloat(currentWeatherProps.temperature.value).toFixed(1);
+            currDescription = currentWeatherProps.textDescription;
+            currWindspeed = currentWeatherProps.windSpeed.value == null ? "unknown" : parseFloat(currentWeatherProps.windSpeed.value).toFixed(1);
+            currFeelsLike = currentWeatherProps.windChill.value == null ? "unknown" : parseFloat(currentWeatherProps.windChill.value).toFixed(1)
+        }
 
         let forecastArray = weatherArray.properties == undefined ? [] : weatherArray.properties.periods;
         for (let i = 0; i < forecastArray.length; i++) {
@@ -44,9 +42,12 @@ export const getAllData = async (req: Request, res: Response, next: NextFunction
             }
             weather.push(dailyWeather);
         }
+        
+        
         let stockArray = ['SPY', 'AAPL', 'GOOGL', 'NVDA', 'META', 'IBM', 'MSFT', 'TSLA', 'VOO', 'VUG', 'VGT', 'VTWO', 'VOT'];
         let stockPriceData = await getStockPrice(stockArray);
         let worldNews = await getWorldnews();
+        worldNews = (worldNews == undefined) ? [] : worldNews;
 
         res.status(200).render(__dirname + "/index.html", { 
             jsonData: weather, 
@@ -72,24 +73,26 @@ async function getWorldnews() :Promise<any>{
 
     const apiKey = 'aa8b64e86aa9434eb08b9e0021139221'
     const newsAPI = new NewsAPI(apiKey);
-    
-    // Top and breaking headlines  
-    const topHeadlines = await newsAPI.getTopHeadlines ({
-        // q: 'stocks',
-        country: 'us',
-        // category: 'business',
-        pageSize: 25,
-        page: 1,
-    });
-    let worldNews: any[] = [];
-    topHeadlines.articles.forEach((news => {
-        if (!news.title.includes("Removed")) {
-            worldNews.push(news.title);
-        }
-    }))
+    try {
+        // Top and breaking headlines  
+        const topHeadlines = await newsAPI.getTopHeadlines ({
+            // q: 'stocks',
+            country: 'us',
+            // category: 'business',
+            pageSize: 25,
+            page: 1,
+        });
+        let worldNews: any[] = [];
+        topHeadlines.articles.forEach((news => {
+            if (!news.title.includes("Removed")) {
+                worldNews.push(news.title);
+            }
+        }))
+        return worldNews;
+    } catch (error) {
+        throw new Error("getWorldnews: Network response was not ok");
+    }
 
-    return worldNews;
-    
 }
 
 
@@ -99,7 +102,7 @@ async function fetchNWSData(url: string) :Promise<any> {
         const json = res.json();
         return json;
     } catch (error) {
-        throw new Error("Network response was not ok");
+        throw new Error("fetchNWSData: Network response was not ok");
     }
 }
 
