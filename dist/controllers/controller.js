@@ -8,13 +8,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAllData = void 0;
 const finnhub_ts_1 = require("finnhub-ts");
-const ts_newsapi_1 = __importDefault(require("ts-newsapi"));
 //  get all weather data
 const getAllData = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -51,8 +47,13 @@ const getAllData = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
         }
         let stockArray = ['SPY', 'AAPL', 'GOOGL', 'NVDA', 'META', 'IBM', 'MSFT', 'TSLA', 'VOO', 'VUG', 'VGT', 'VTWO', 'VOT'];
         let stockPriceData = yield getStockPrice(stockArray);
-        let worldNews = yield getWorldnews();
-        worldNews = (worldNews == undefined) ? [] : worldNews;
+        let newsResponse = yield getWorldnews();
+        let worldNews = [];
+        if (newsResponse.results != undefined) {
+            for (let i = 0; i < newsResponse.results.length; i++) {
+                worldNews.push(newsResponse.results[i].title);
+            }
+        }
         res.status(200).render(__dirname + "/index.html", {
             jsonData: weather,
             stockArray: stockArray,
@@ -73,24 +74,12 @@ exports.getAllData = getAllData;
 // get all top news : call every 15 mins (100 per day limit)
 function getWorldnews() {
     return __awaiter(this, void 0, void 0, function* () {
-        const apiKey = 'aa8b64e86aa9434eb08b9e0021139221';
-        const newsAPI = new ts_newsapi_1.default(apiKey);
+        let apiKey = "pUM24Qb2wsN7AmVQX7lInxm0uLRkyfZ3";
+        let url = "https://api.nytimes.com/svc/news/v3/content/nyt/world.json?api-key=" + apiKey;
         try {
-            // Top and breaking headlines  
-            const topHeadlines = yield newsAPI.getTopHeadlines({
-                // q: 'stocks',
-                country: 'us',
-                // category: 'business',
-                pageSize: 25,
-                page: 1,
-            });
-            let worldNews = [];
-            topHeadlines.articles.forEach((news => {
-                if (!news.title.includes("Removed")) {
-                    worldNews.push(news.title);
-                }
-            }));
-            return worldNews;
+            const res = yield fetch(url);
+            const json = res.json();
+            return json;
         }
         catch (error) {
             throw new Error("getWorldnews: Network response was not ok");
