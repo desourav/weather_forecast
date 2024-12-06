@@ -27,7 +27,7 @@ const getAllData = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
         let currentWeatherProps = currentWeather.features[0].properties;
         let currIcon = "n/a", currTemp = "n/a", currDescription = "n/a", currWindspeed = "n/a", currFeelsLike = "n/a";
         if (currentWeatherProps != undefined) {
-            currIcon = currentWeatherProps.icon.replace("medium", "large");
+            currIcon = currentWeatherProps.icon == null ? "n/a" : currentWeatherProps.icon.replace("medium", "large");
             currTemp = parseFloat(currentWeatherProps.temperature.value).toFixed(1);
             currDescription = currentWeatherProps.textDescription;
             currWindspeed = currentWeatherProps.windSpeed.value == null ? "unknown" : parseFloat(currentWeatherProps.windSpeed.value).toFixed(1);
