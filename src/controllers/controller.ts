@@ -1,8 +1,6 @@
 import {Request, Response, NextFunction} from 'express';
 import {WeatherInterface} from '../models/weather-interface';
 import { DefaultApi } from 'finnhub-ts';
-import NewsAPI from 'ts-newsapi';
-import fs from 'fs';
 
 
 //  get all weather data
@@ -50,7 +48,14 @@ export const getAllData = async (req: Request, res: Response, next: NextFunction
         let worldNews = [];
         if (newsResponse.results != undefined) {
             for (let i = 0; i < newsResponse.results.length; i++) {
-                worldNews.push(newsResponse.results[i].title);
+                if ((newsResponse.results[i].title.length > 0) && (newsResponse.results[i].abstract.length > 0)) {
+                    let news = {
+                        title: newsResponse.results[i].title,
+                        abstract: newsResponse.results[i].abstract,
+                        icon: newsResponse.results[i].multimedia[2] != undefined ? newsResponse.results[i].multimedia[2] : "n/a"
+                    }
+                    worldNews.push(news);
+                }
             }
         }
         

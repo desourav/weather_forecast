@@ -51,7 +51,14 @@ const getAllData = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
         let worldNews = [];
         if (newsResponse.results != undefined) {
             for (let i = 0; i < newsResponse.results.length; i++) {
-                worldNews.push(newsResponse.results[i].title);
+                if ((newsResponse.results[i].title.length > 0) && (newsResponse.results[i].abstract.length > 0)) {
+                    let news = {
+                        title: newsResponse.results[i].title,
+                        abstract: newsResponse.results[i].abstract,
+                        icon: newsResponse.results[i].multimedia[2] != undefined ? newsResponse.results[i].multimedia[2] : "n/a"
+                    };
+                    worldNews.push(news);
+                }
             }
         }
         res.status(200).render(__dirname + "/index.html", {

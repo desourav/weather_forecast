@@ -5,7 +5,6 @@
     "express": "^4.21.1",
     "finnhub-ts": "^1.0.7",
     "mustache": "^4.2.0",
-    "newsapi": "^2.4.1",
     "request": "^2.88.2",
     "ts-newsapi": "^1.0.2"
   },
