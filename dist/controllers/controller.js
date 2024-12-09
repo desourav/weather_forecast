@@ -51,11 +51,12 @@ const getAllData = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
         let worldNews = [];
         if (newsResponse.results != undefined) {
             for (let i = 0; i < newsResponse.results.length; i++) {
-                if ((newsResponse.results[i].title.length > 0) && (newsResponse.results[i].abstract.length > 0)) {
+                if ((newsResponse.results[i].title.length > 0) && (newsResponse.results[i].abstract.length > 0)
+                    && newsResponse.results[i].multimedia[2].url != undefined) {
                     let news = {
                         title: newsResponse.results[i].title,
                         abstract: newsResponse.results[i].abstract,
-                        icon: newsResponse.results[i].multimedia[2].url != undefined ? newsResponse.results[i].multimedia[2].url : "n/a"
+                        icon: newsResponse.results[i].multimedia[2].url
                     };
                     worldNews.push(news);
                 }
@@ -82,7 +83,7 @@ exports.getAllData = getAllData;
 function getWorldnews() {
     return __awaiter(this, void 0, void 0, function* () {
         let apiKey = "pUM24Qb2wsN7AmVQX7lInxm0uLRkyfZ3";
-        let url = "https://api.nytimes.com/svc/news/v3/content/nyt/world.json?api-key=" + apiKey;
+        let url = "https://api.nytimes.com/svc/topstories/v2/world.json?api-key=" + apiKey;
         try {
             const res = yield fetch(url);
             const json = res.json();

@@ -15,7 +15,8 @@
     }
     body {
         background-image: url(mountains.jpeg);
-        background-size:cover;
+        background-size: cover;
+	    background-attachment: fixed;
         background-repeat: no-repeat;
     }
 </style>
@@ -65,7 +66,7 @@
             </thead>
         </table>
         <p> <% worldNews %> </p> 
-        <table id="worldNews" border="1"">
+        <table id="worldNews" border="1" style="float: left;">
             <thead>
                 <tr>
                     <th>Top News</th>
@@ -77,6 +78,16 @@
                     <% } %>
             </thead>
         </table>
+    <!-- Slideshow container -->
+    <div class="slideshow-container" border="1" style="float: left; width: 1250px; height: 1250px;">
+        <% for (var i = 0 ; i < worldNews.length ; i++) { %>
+            <div class="newsSlides fade">
+                <div class="numbertext" style="font-size: large;"><%= worldNews[i].title %></div>
+                <div class="text" style="color: black; font-size: medium; text-wrap:balance;font-family:'Times New Roman', Times, serif;"><%= worldNews[i].abstract %></div>
+                <img src= <%= worldNews[i].icon %> style="width: 25%; height: 25%">
+            </div>
+        <% } %>
+    </div>
     </div>
     <table id="currentWeather" border="1" style="position: absolute; right: 0; bottom: 0;">
         <thead>
@@ -91,6 +102,9 @@
             
         </thead>
     </table>
+
+    
+
     <script type="text/javascript">
         //put this somewhere in "show.html"
         //using window onload event to run function
@@ -229,6 +243,21 @@
             //print current date and time to the DOM
             document.getElementById("clock").innerHTML = dateTime;
             setTimeout(clock, 1000);
+    }
+
+    let slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+        let i;
+        let slides = document.getElementsByClassName("newsSlides");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {slideIndex = 1}
+        slides[slideIndex-1].style.display = "block";
+        setTimeout(showSlides, 20000); // Change image every 20 seconds
     }
     </script>
 </body>

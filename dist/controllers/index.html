@@ -66,7 +66,7 @@
             </thead>
         </table>
         <p> <% worldNews %> </p> 
-        <table id="worldNews" border="1"">
+        <table id="worldNews" border="1" style="float: left;">
             <thead>
                 <tr>
                     <th>Top News</th>
@@ -78,6 +78,16 @@
                     <% } %>
             </thead>
         </table>
+    <!-- Slideshow container -->
+    <div class="slideshow-container" border="1" style="float: left; width: 1250px; height: 1250px;">
+        <% for (var i = 0 ; i < worldNews.length ; i++) { %>
+            <div class="newsSlides fade">
+                <div class="numbertext" style="font-size: large;"><%= worldNews[i].title %></div>
+                <div class="text" style="color: black; font-size: medium; text-wrap:balance;font-family:'Times New Roman', Times, serif;"><%= worldNews[i].abstract %></div>
+                <img src= <%= worldNews[i].icon %> style="width: 25%; height: 25%">
+            </div>
+        <% } %>
+    </div>
     </div>
     <table id="currentWeather" border="1" style="position: absolute; right: 0; bottom: 0;">
         <thead>
@@ -93,63 +103,7 @@
         </thead>
     </table>
 
-    <!-- Slideshow container -->
-    <div class="slideshow-container" style="float: right;margin-left: auto;">
-        <div class="newsSlides fade">
-        <div class="numbertext"><%= worldNews[0].title %></div>
-        <div class="text" style="color: black; font-size: medium;"><%= worldNews[0].abstract %></div>
-        <img src= <%= worldNews[0].icon %> style="width: 15%; height: 15%">
-        </div>
     
-        <div class="newsSlides fade">
-        <div class="numbertext"><%= worldNews[1].title %></div>
-        <div class="text" style="color: black; font-size: medium;"><%= worldNews[1].abstract %></div>
-        <img src= <%= worldNews[1].icon %> style="width: 15%; height: 15%">
-        </div>
-    
-        <div class="newsSlides fade">
-        <div class="numbertext"><%= worldNews[2].title %></div>
-        <div class="text" style="color: black; font-size: medium;"><%= worldNews[2].abstract %></div>
-        <img src= <%= worldNews[2].icon %> style="width: 15%; height: 15%">
-        </div>
-
-        <div class="newsSlides fade">
-        <div class="numbertext"><%= worldNews[3].title %></div>
-        <div class="text" style="color: black; font-size: medium;"><%= worldNews[3].abstract %></div>
-        <img src= <%= worldNews[3].icon %> style="width: 15%; height: 15%">
-        </div>
-
-        <div class="newsSlides fade">
-        <div class="numbertext"><%= worldNews[4].title %></div>
-        <div class="text" style="color: black; font-size: medium;"><%= worldNews[4].abstract %></div>
-        <img src= <%= worldNews[4].icon %> style="width: 15%; height: 15%">
-        </div>
-        <div class="newsSlides fade">
-        <div class="numbertext"><%= worldNews[5].title %></div>
-        <div class="text" style="color: black; font-size: medium;"><%= worldNews[5].abstract %></div>
-        <img src= <%= worldNews[5].icon %> style="width: 15%; height: 15%">
-        </div>
-        <div class="newsSlides fade">
-        <div class="numbertext"><%= worldNews[6].title %></div>
-        <div class="text" style="color: black; font-size: medium;"><%= worldNews[6].abstract %></div>
-        <img src= <%= worldNews[6].icon %> style="width: 15%; height: 15%">
-        </div>
-        <div class="newsSlides fade">
-        <div class="numbertext"><%= worldNews[7].title %></div>
-        <div class="text" style="color: black; font-size: medium;"><%= worldNews[7].abstract %></div>
-        <img src= <%= worldNews[7].icon %> style="width: 15%; height: 15%">
-        </div>
-        <div class="newsSlides fade">
-        <div class="numbertext"><%= worldNews[8].title %></div>
-        <div class="text" style="color: black; font-size: medium;"><%= worldNews[8].abstract %></div>
-        <img src= <%= worldNews[8].icon %> style="width: 15%; height: 15%">
-        </div>
-        <div class="newsSlides fade">
-        <div class="numbertext"><%= worldNews[9].title %></div>
-        <div class="text" style="color: black; font-size: medium;"><%= worldNews[9].abstract %></div>
-        <img src= <%= worldNews[9].icon %> style="width: 15%; height: 15%">
-        </div>
-    </div>
 
     <script type="text/javascript">
         //put this somewhere in "show.html"
