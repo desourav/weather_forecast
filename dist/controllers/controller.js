@@ -55,7 +55,7 @@ const getAllData = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
                     let news = {
                         title: newsResponse.results[i].title,
                         abstract: newsResponse.results[i].abstract,
-                        icon: newsResponse.results[i].multimedia[2] != undefined ? newsResponse.results[i].multimedia[2] : "n/a"
+                        icon: newsResponse.results[i].multimedia[2].url != undefined ? newsResponse.results[i].multimedia[2].url : "n/a"
                     };
                     worldNews.push(news);
                 }

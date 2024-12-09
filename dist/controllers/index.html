@@ -16,7 +16,7 @@
     body {
         background-image: url(mountains.jpeg);
         background-size: cover;
-	background-attachment: fixed;
+	    background-attachment: fixed;
         background-repeat: no-repeat;
     }
 </style>
@@ -92,6 +92,40 @@
             
         </thead>
     </table>
+
+    <!-- Slideshow container -->
+    <div class="slideshow-container">
+        <div class="newsSlides fade">
+        <div class="numbertext"><%= worldNews[0].title %></div>
+        <img src= <%= worldNews[0].icon %> style="width: 30%; height: 30%">
+        <div class="text" style="color: white;"><%= worldNews[0].abstract %></div>
+        </div>
+    
+        <div class="newsSlides fade">
+        <div class="numbertext"><%= worldNews[1].title %></div>
+        <img src= <%= worldNews[1].icon %> style="width: 30%; height: 30%">
+        <div class="text" style="color: white;"><%= worldNews[1].abstract %></div>
+        </div>
+    
+        <div class="newsSlides fade">
+        <div class="numbertext"><%= worldNews[2].title %></div>
+        <img src= <%= worldNews[2].icon %> style="width: 30%; height: 30%">
+        <div class="text" style="color: white;"><%= worldNews[2].abstract %></div>
+        </div>
+
+        <div class="newsSlides fade">
+        <div class="numbertext"><%= worldNews[3].title %></div>
+        <img src= <%= worldNews[3].icon %> style="width: 30%; height: 30%">
+        <div class="text" style="color: white;"><%= worldNews[3].abstract %></div>
+        </div>
+        
+        <div class="newsSlides fade">
+        <div class="numbertext"><%= worldNews[4].title %></div>
+        <img src= <%= worldNews[4].icon %> style="width: 30%; height: 30%">
+        <div class="text" style="color: white;"><%= worldNews[4].abstract %></div>
+        </div>
+    </div>
+
     <script type="text/javascript">
         //put this somewhere in "show.html"
         //using window onload event to run function
@@ -230,6 +264,21 @@
             //print current date and time to the DOM
             document.getElementById("clock").innerHTML = dateTime;
             setTimeout(clock, 1000);
+    }
+
+    let slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+        let i;
+        let slides = document.getElementsByClassName("newsSlides");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {slideIndex = 1}
+        slides[slideIndex-1].style.display = "block";
+        setTimeout(showSlides, 10000); // Change image every 10 seconds
     }
     </script>
 </body>
