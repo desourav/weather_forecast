@@ -98,31 +98,41 @@
         <div class="newsSlides fade">
         <div class="numbertext"><%= worldNews[0].title %></div>
         <img src= <%= worldNews[0].icon %> style="width: 15%; height: 15%">
-        <div class="text" style="color: white;"><%= worldNews[0].abstract %></div>
+        <div class="text" style="color: black; font-size: small; text-wrap:stable;"><%= worldNews[0].abstract %></div>
         </div>
     
         <div class="newsSlides fade">
         <div class="numbertext"><%= worldNews[1].title %></div>
         <img src= <%= worldNews[1].icon %> style="width: 15%; height: 15%">
-        <div class="text" style="color: white; font-size: small"><%= worldNews[1].abstract %></div>
+        <div class="text" style="color: black; font-size: small; text-wrap:stable;"><%= worldNews[1].abstract %></div>
         </div>
     
         <div class="newsSlides fade">
         <div class="numbertext"><%= worldNews[2].title %></div>
         <img src= <%= worldNews[2].icon %> style="width: 15%; height: 15%">
-        <div class="text" style="color: white; font-size: small"><%= worldNews[2].abstract %></div>
+        <div class="text" style="color: black; font-size: small; text-wrap:stable;"><%= worldNews[2].abstract %></div>
         </div>
 
         <div class="newsSlides fade">
         <div class="numbertext"><%= worldNews[3].title %></div>
         <img src= <%= worldNews[3].icon %> style="width: 15%; height: 15%">
-        <div class="text" style="color: white; font-size: small"><%= worldNews[3].abstract %></div>
+        <div class="text" style="color: black; font-size: small; text-wrap:stable;"><%= worldNews[3].abstract %></div>
         </div>
 
         <div class="newsSlides fade">
         <div class="numbertext"><%= worldNews[4].title %></div>
         <img src= <%= worldNews[4].icon %> style="width: 15%; height: 15%">
-        <div class="text" style="color: white; font-size: small;"><%= worldNews[4].abstract %></div>
+        <div class="text" style="color: black; font-size: small; text-wrap:stable;"><%= worldNews[4].abstract %></div>
+        </div>
+        <div class="newsSlides fade">
+        <div class="numbertext"><%= worldNews[5].title %></div>
+        <img src= <%= worldNews[5].icon %> style="width: 15%; height: 15%">
+        <div class="text" style="color: black; font-size: small; text-wrap:stable;"><%= worldNews[5].abstract %></div>
+        </div>
+        <div class="newsSlides fade">
+        <div class="numbertext"><%= worldNews[6].title %></div>
+        <img src= <%= worldNews[6].icon %> style="width: 15%; height: 15%">
+        <div class="text" style="color: black; font-size: small; text-wrap:stable;"><%= worldNews[6].abstract %></div>
         </div>
     </div>
 
@@ -278,7 +288,7 @@
         slideIndex++;
         if (slideIndex > slides.length) {slideIndex = 1}
         slides[slideIndex-1].style.display = "block";
-        setTimeout(showSlides, 10000); // Change image every 10 seconds
+        setTimeout(showSlides, 20000); // Change image every 20 seconds
     }
     </script>
 </body>
