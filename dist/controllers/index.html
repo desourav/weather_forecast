@@ -71,7 +71,7 @@
                 <tr>
                     <th>Top News</th>
                 </tr>
-                <% for (var i = 0 ; i < worldNews.length ; i++) { %>
+                <% for (var i = 0 ; i < 20 ; i++) { %>
                     <tr>
                         <td><%= worldNews[i].title %></td>
                     </tr>
@@ -79,12 +79,12 @@
             </thead>
         </table>
     <!-- Slideshow container -->
-    <div class="slideshow-container" border="1" style="float: left; width: 1250px; height: 1250px;">
-        <% for (var i = 0 ; i < worldNews.length ; i++) { %>
+    <div class="slideshow-container" border="1" style="float: left; width: 600px; height: 600px;">
+        <% for (var i = 0 ; i < 20 ; i++) { %>
             <div class="newsSlides fade">
-                <div class="numbertext" style="font-size: large;"><%= worldNews[i].title %></div>
+                <div class="numbertext" style="font-size: medium; text-decoration: underline;"><%= worldNews[i].title %></div>
                 <div class="text" style="color: black; font-size: medium; text-wrap:balance;font-family:'Times New Roman', Times, serif;"><%= worldNews[i].abstract %></div>
-                <img src= <%= worldNews[i].icon %> style="width: 25%; height: 25%">
+                <img src= <%= worldNews[i].icon %> style="width: 40%; height: 40%">
             </div>
         <% } %>
     </div>

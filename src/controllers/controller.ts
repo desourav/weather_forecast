@@ -17,7 +17,7 @@ export const getAllData = async (req: Request, res: Response, next: NextFunction
         let geoJSONData = await fetchNWSData(baseURL);
         let weatherArray = await fetchNWSData(geoJSONData.properties.forecast + "?units=si");
 
-        let currentWeather = await fetchNWSData("https://api.weather.gov/stations/KDXR/observations"); // nearest weather station: Danbury Airport
+        let currentWeather = await fetchNWSData("https://api.weather.gov/stations/KHPN/observations"); // nearest weather station: Danbury Airport
         let currentWeatherProps = currentWeather.features[0].properties;
         let currIcon = "n/a", currTemp = "n/a", currDescription = "n/a", currWindspeed = "n/a", currFeelsLike = "n/a";
         if (currentWeatherProps != undefined) {
