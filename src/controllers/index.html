@@ -71,7 +71,7 @@
                 <tr>
                     <th>Top News</th>
                 </tr>
-                <% for (var i = 0 ; i < worldNews.length ; i++) { %>
+                <% for (var i = 0 ; i < 20 ; i++) { %>
                     <tr>
                         <td><%= worldNews[i].title %></td>
                     </tr>
@@ -79,12 +79,12 @@
             </thead>
         </table>
     <!-- Slideshow container -->
-    <div class="slideshow-container" border="1" style="float: left; width: 1250px; height: 1250px;">
-        <% for (var i = 0 ; i < worldNews.length ; i++) { %>
+    <div class="slideshow-container" border="1" style="float: left; width: 600px; height: 600px;">
+        <% for (var i = 0 ; i < 20 ; i++) { %>
             <div class="newsSlides fade">
-                <div class="numbertext" style="font-size: large;"><%= worldNews[i].title %></div>
-                <div class="text" style="color: black; font-size: medium; text-wrap:balance;font-family:'Times New Roman', Times, serif;"><%= worldNews[i].abstract %></div>
-                <img src= <%= worldNews[i].icon %> style="width: 25%; height: 25%">
+                <div class="numbertext" style="font-size: medium; text-decoration: underline;"><%= worldNews[i].title %></div>
+                <div class="text" style="color: black; font-size: medium; text-wrap:balance;font-family:Arial, Helvetica, sans-serif"><%= worldNews[i].abstract %></div>
+                <img src= <%= worldNews[i].icon %> style="width: 40%; height: 40%">
             </div>
         <% } %>
     </div>
@@ -121,6 +121,29 @@
         window.addEventListener("load", () => {
             clock();
         });
+
+        window.addEventListener("load", () => {
+            setCellColorNews();
+        });
+
+        function setCellColorNews() {
+            let table = document.getElementById("worldNews");
+            let timeLoad = now.getTime();
+            let timeNow = Date.now();
+            let cells = table.querySelectorAll("td");
+
+            for (let i = 0; i < cells.length; i++) {
+                if (Math.floor((timeNow-timeLoad)/20000) == i) {
+                    console.log(timeNow,timeLoad,Math.floor((timeNow-timeLoad)/20000),cells[i].textContent)
+                    cells[i].bgColor = "#aed6f1";
+                }
+                else cells[i].bgColor = "transparent";
+            }
+            
+                
+            
+            setTimeout(setCellColorNews, 20000);
+        }
 
         function getWeatherColor(temp)
             {

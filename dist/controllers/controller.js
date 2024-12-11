@@ -62,6 +62,7 @@ const getAllData = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
                 }
             }
         }
+        let epochTime = Date.now();
         res.status(200).render(__dirname + "/index.html", {
             jsonData: weather,
             stockArray: stockArray,
