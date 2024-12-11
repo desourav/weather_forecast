@@ -133,7 +133,7 @@
             let cells = table.querySelectorAll("td");
 
             for (let i = 0; i < cells.length; i++) {
-                if (Math.floor((timeNow-timeLoad)/20000) == i) {
+                if (Math.floor((timeNow-timeLoad)/20000) % 20 == i) {
                     console.log(timeNow,timeLoad,Math.floor((timeNow-timeLoad)/20000),cells[i].textContent)
                     cells[i].bgColor = "#aed6f1";
                 }
