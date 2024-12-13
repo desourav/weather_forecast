@@ -44,6 +44,7 @@ export const getAllData = async (req: Request, res: Response, next: NextFunction
         
         let stockArray = ['SPY', 'AAPL', 'GOOGL', 'NVDA', 'META', 'IBM', 'MSFT', 'TSLA', 'VOO', 'VUG', 'VGT', 'VTWO', 'VOT'];
         let stockPriceData = await getStockPrice(stockArray);
+        stockPriceData = stockPriceData == undefined ? [] : stockPriceData;
         let newsResponse = await getWorldnews();
         let worldNews = [];
         if (newsResponse.results != undefined) {
@@ -89,6 +90,7 @@ async function getWorldnews() :Promise<any>{
         const json = res.json();
         return json;
     } catch (error) {
+        console.log(error);
         throw new Error("getWorldnews: Network response was not ok");
     }
 
@@ -101,6 +103,7 @@ async function fetchNWSData(url: string) :Promise<any> {
         const json = res.json();
         return json;
     } catch (error) {
+        console.log(error);
         throw new Error("fetchNWSData: Network response was not ok");
     }
 }
@@ -108,20 +111,27 @@ async function fetchNWSData(url: string) :Promise<any> {
 
 // get all stock data
 async function getStockPrice(stock: string[]) :Promise<any> {
-    let stockData = [];
-    const finnhubClient = new DefaultApi({
-        apiKey: 'cspc6j1r01qnvmpus3bgcspc6j1r01qnvmpus3c0',
-        isJsonMime: (input) => {
-          try {
-            JSON.parse(input)
-            return true
-          } catch (error) {}
-          return false
-        },
-      });
-    for (let i = 0; i < stock.length; i++) {
-        let res = await finnhubClient.quote(stock[i]);
-        stockData.push(res.data);
+    try {
+        let stockData = [];
+        const finnhubClient = new DefaultApi({
+            apiKey: 'cspc6j1r01qnvmpus3bgcspc6j1r01qnvmpus3c0',
+            isJsonMime: (input) => {
+            try {
+                JSON.parse(input)
+                return true
+            } catch (error) {}
+            return false
+            },
+        });
+        for (let i = 0; i < stock.length; i++) {
+            let res = await finnhubClient.quote(stock[i]);
+            stockData.push(res.data);
+        }
+        return stockData;
+        
+    } catch (error) {
+        console.log(error);
+        throw new Error("getStockPrice: Network response was not ok");
     }
-    return stockData;
+    
 }

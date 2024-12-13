@@ -47,6 +47,7 @@ const getAllData = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
         }
         let stockArray = ['SPY', 'AAPL', 'GOOGL', 'NVDA', 'META', 'IBM', 'MSFT', 'TSLA', 'VOO', 'VUG', 'VGT', 'VTWO', 'VOT'];
         let stockPriceData = yield getStockPrice(stockArray);
+        stockPriceData = stockPriceData == undefined ? [] : stockPriceData;
         let newsResponse = yield getWorldnews();
         let worldNews = [];
         if (newsResponse.results != undefined) {
@@ -91,6 +92,7 @@ function getWorldnews() {
             return json;
         }
         catch (error) {
+            console.log(error);
             throw new Error("getWorldnews: Network response was not ok");
         }
     });
@@ -103,6 +105,7 @@ function fetchNWSData(url) {
             return json;
         }
         catch (error) {
+            console.log(error);
             throw new Error("fetchNWSData: Network response was not ok");
         }
     });
@@ -110,22 +113,28 @@ function fetchNWSData(url) {
 // get all stock data
 function getStockPrice(stock) {
     return __awaiter(this, void 0, void 0, function* () {
-        let stockData = [];
-        const finnhubClient = new finnhub_ts_1.DefaultApi({
-            apiKey: 'cspc6j1r01qnvmpus3bgcspc6j1r01qnvmpus3c0',
-            isJsonMime: (input) => {
-                try {
-                    JSON.parse(input);
-                    return true;
-                }
-                catch (error) { }
-                return false;
-            },
-        });
-        for (let i = 0; i < stock.length; i++) {
-            let res = yield finnhubClient.quote(stock[i]);
-            stockData.push(res.data);
+        try {
+            let stockData = [];
+            const finnhubClient = new finnhub_ts_1.DefaultApi({
+                apiKey: 'cspc6j1r01qnvmpus3bgcspc6j1r01qnvmpus3c0',
+                isJsonMime: (input) => {
+                    try {
+                        JSON.parse(input);
+                        return true;
+                    }
+                    catch (error) { }
+                    return false;
+                },
+            });
+            for (let i = 0; i < stock.length; i++) {
+                let res = yield finnhubClient.quote(stock[i]);
+                stockData.push(res.data);
+            }
+            return stockData;
         }
-        return stockData;
+        catch (error) {
+            console.log(error);
+            throw new Error("getStockPrice: Network response was not ok");
+        }
     });
 }
