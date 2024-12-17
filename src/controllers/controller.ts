@@ -50,7 +50,7 @@ export const getAllData = async (req: Request, res: Response, next: NextFunction
         if (newsResponse.results != undefined) {
             for (let i = 0; i < newsResponse.results.length; i++) {
                 if ((newsResponse.results[i].title.length > 0) && (newsResponse.results[i].abstract.length > 0) 
-                    && newsResponse.results[i].multimedia[2].url != undefined) {
+                    && newsResponse.results[i].multimedia != undefined) {
                     let news = {
                         title: newsResponse.results[i].title,
                         abstract: newsResponse.results[i].abstract,
