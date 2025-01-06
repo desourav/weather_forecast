@@ -37,6 +37,7 @@ const getAllData = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
         for (let i = 0; i < forecastArray.length; i++) {
             let dailyWeather = {
                 "name": forecastArray[i].name.replace("This", "").replace("Day", "AM").replace("Night", "PM"),
+                "startTime": forecastArray[i].startTime.split("T")[0],
                 "temperature": forecastArray[i].temperature,
                 "windSpeed": forecastArray[i].windSpeed,
                 "shortForecast": forecastArray[i].shortForecast,
