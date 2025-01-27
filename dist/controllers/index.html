@@ -83,9 +83,9 @@
     <div class="slideshow-container" border="1" style="float: left; width: 600px; height: 600px;">
         <% for (var i = 0 ; i < 20 ; i++) { %>
             <div class="newsSlides fade">
-                <div class="text" style="color: black; font-size: medium; text-wrap:balance;font-family:Arial, Helvetica, sans-serif"><%= worldNews[i].abstract %></div>
-                <img src= <%= worldNews[i].icon %> style="width: 40%; height: 40%">
-            </div>
+                <img src= <%= worldNews[i].icon %> style="width: 50%; height: 50%">
+                <div class="text" style="height: 40px; width: 600px; color: black; font-size: medium; text-wrap:balance;font-family:Arial, Helvetica, sans-serif"><%= worldNews[i].abstract %></div>
+	    </div>
         <% } %>
     </div>
     </div>
