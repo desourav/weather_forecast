@@ -24,7 +24,7 @@ export const getAllData = async (req: Request, res: Response, next: NextFunction
             currIcon = currentWeatherProps.icon == null ? "n/a" : currentWeatherProps.icon.replace("medium", "large");
             currTemp = parseFloat(currentWeatherProps.temperature.value).toFixed(1);
             currDescription = currentWeatherProps.textDescription;
-            currWindspeed = currentWeatherProps.windSpeed.value == null ? "unknown" : parseFloat(currentWeatherProps.windSpeed.value).toFixed(1);
+            currWindspeed = currentWeatherProps.windSpeed.value == null ? "unknown" : currentWeatherProps.windSpeed.value.split("to").map((s: String)=> Math.round(parseInt(s.split("km/h")[0].trim())/1.6)).join(" to ") + " mph";
             currFeelsLike = currentWeatherProps.windChill.value == null ? "unknown" : parseFloat(currentWeatherProps.windChill.value).toFixed(1)
         }
 
@@ -34,7 +34,7 @@ export const getAllData = async (req: Request, res: Response, next: NextFunction
                 "name": forecastArray[i].name.replace("This", "").replace("Day", "AM").replace("Night", "PM"),
                 "startTime": forecastArray[i].startTime.split("T")[0],
                 "temperature": forecastArray[i].temperature,
-                "windSpeed": forecastArray[i].windSpeed,
+                "windSpeed": forecastArray[i].windSpeed.split("to").map((s: String)=> Math.round(parseInt(s.split("km/h")[0].trim())/1.6)).join(" to ") + " mph",
                 "shortForecast": forecastArray[i].shortForecast,
                 "detailedForecast": forecastArray[i].detailedForecast,
                 "icon": forecastArray[i].icon
