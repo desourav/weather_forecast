@@ -114,9 +114,16 @@
             'use strict';
             var millisecondsBeforeRefresh = 900000; //Adjust time here (eg every 15mins)
             window.setTimeout(function () {
-                //refresh the entire document
-                document.location.reload();
+                const d = new Date();
+                let hour = d.getHours();
+                if (hour > 5 && hour < 23) { // only refresh news 5-23 hours
+                    //refresh the entire document
+                    document.location.reload()
+                } else {
+                    console.log("no refresh during idle mode")
+                }
             }, millisecondsBeforeRefresh);
+            
         };
         window.addEventListener("load", () => {
             clock();
