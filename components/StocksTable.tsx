@@ -18,7 +18,7 @@ const headers = ['Ticker', 'Price', 'Chg', '%', 'Open', 'Prev']
 
 export function StocksTable({ tickers, data, loading }: Props) {
   return (
-    <div className="flex flex-col flex-1 min-h-0 bg-white/19 backdrop-blur-md backdrop-saturate-150 border border-white/30 rounded-2xl shadow-sm overflow-hidden">
+    <div className="flex flex-col flex-1 min-h-0 bg-white/10 backdrop-blur-md backdrop-saturate-150 border border-white/15 rounded-2xl shadow-sm overflow-hidden">
       <div className="px-3 pt-2 pb-1 flex-shrink-0">
         <p className="text-sm text-muted-foreground uppercase tracking-wide font-bold">Markets</p>
       </div>

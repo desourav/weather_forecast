@@ -29,7 +29,7 @@ export function ForecastRow({ data, loading }: Props) {
       {data.map((period, i) => (
         <div
           key={i}
-          className="flex flex-col bg-white/19 backdrop-blur-md backdrop-saturate-150 border border-white/30 rounded-xl shadow-sm overflow-hidden"
+          className="flex flex-col bg-white/10 backdrop-blur-md backdrop-saturate-150 border border-white/15 rounded-xl shadow-sm overflow-hidden"
         >
           <div className={cn('px-3 py-2', tempTint(Number(period.temperature)))}>
             <p className="text-xs font-bold text-foreground truncate">{period.name}</p>

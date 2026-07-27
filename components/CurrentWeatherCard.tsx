@@ -9,7 +9,7 @@ interface Props {
 export function CurrentWeatherCard({ data, loading }: Props) {
   if (loading || !data) {
     return (
-      <div className="flex-shrink-0 bg-white/19 backdrop-blur-md backdrop-saturate-150 border border-white/30 rounded-2xl shadow-sm p-3 space-y-2 w-full">
+      <div className="flex-shrink-0 bg-white/10 backdrop-blur-md backdrop-saturate-150 border border-white/15 rounded-2xl shadow-sm p-3 space-y-2 w-full">
         {[...Array(4)].map((_, i) => (
           <div key={i} className="h-4 bg-white/40 rounded animate-pulse" />
         ))}
@@ -25,7 +25,7 @@ export function CurrentWeatherCard({ data, loading }: Props) {
   ]
 
   return (
-    <div className="flex-shrink-0 min-h-[135px] bg-white/19 backdrop-blur-md backdrop-saturate-150 border border-white/30 rounded-2xl shadow-sm p-3 w-full">
+    <div className="flex-shrink-0 min-h-[135px] bg-white/10 backdrop-blur-md backdrop-saturate-150 border border-white/15 rounded-2xl shadow-sm p-3 w-full">
       <div className="flex items-center gap-3 h-full">
         {data.icon && data.icon !== 'n/a' && (
           <img src={data.icon} alt={data.description} width={96} height={96} className="rounded flex-shrink-0" />

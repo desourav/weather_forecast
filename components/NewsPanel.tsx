@@ -28,7 +28,7 @@ export function NewsPanel({ articles, loading }: Props) {
   const active = articles[activeIndex]
 
   return (
-    <div className="w-full flex-1 bg-white/19 backdrop-blur-md backdrop-saturate-150 border border-white/30 rounded-2xl shadow-sm overflow-hidden flex flex-col">
+    <div className="w-full flex-1 bg-white/10 backdrop-blur-md backdrop-saturate-150 border border-white/15 rounded-2xl shadow-sm overflow-hidden flex flex-col">
       {/* Header */}
       <div className="px-4 pt-3 pb-2 border-b border-border/40 flex-shrink-0">
         <p className="text-xs text-muted-foreground uppercase tracking-wide font-bold">Top News</p>

@@ -242,7 +242,7 @@ export function StockTicker() {
   }, [])
 
   return (
-    <div className="w-full bg-black/70 backdrop-blur-md border-t border-white/10 select-none overflow-hidden">
+    <div className="w-full bg-black/35 backdrop-blur-md border-t border-white/5 select-none overflow-hidden">
       <div className="flex items-stretch divide-x divide-white/10">
         {slots.map((slot, si) => {
           const q = loading ? null : (quotes[(offset + si) % (quotes.length || 1)] ?? null)

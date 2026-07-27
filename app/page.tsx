@@ -136,7 +136,7 @@ export default function Home() {
           <div className="flex flex-col gap-4 min-h-0">
             <StocksTable tickers={state.tickers} data={state.stocks} loading={state.loading} />
             <CurrentWeatherCard data={state.current} loading={state.loading} />
-            <div className="flex-shrink-0 bg-white/19 backdrop-blur-md backdrop-saturate-150 border border-white/30 rounded-2xl shadow-sm px-4 py-3">
+            <div className="flex-shrink-0 bg-white/10 backdrop-blur-md backdrop-saturate-150 border border-white/15 rounded-2xl shadow-sm px-4 py-3">
               <LiveClock />
             </div>
           </div>
