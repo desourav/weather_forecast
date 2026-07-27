@@ -36,15 +36,29 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-@keyframes ticker-scroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+
+/* ── Calendar / split-flap ticker animations ── */
+
+/* Top half of card: old character folds downward (0° → -90°) */
+@keyframes flap-top {
+  0%   { transform: rotateX(0deg);   opacity: 1; }
+  100% { transform: rotateX(-90deg); opacity: 0.4; }
 }
 
-.ticker-track {
-  animation: ticker-scroll 75s linear infinite;
+/* Bottom half of card: new character unfolds from behind (90° → 0°) */
+@keyframes flap-bottom {
+  0%   { transform: rotateX(90deg); opacity: 0.4; }
+  100% { transform: rotateX(0deg);  opacity: 1; }
 }
 
-.ticker-track:hover {
-  animation-play-state: paused;
+.ticker-flap-top {
+  animation-name: flap-top;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+}
+
+.ticker-flap-bottom {
+  animation-name: flap-bottom;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
 }

@@ -26,6 +26,6 @@ export function LiveClock() {
   }, [])
 
   return (
-    <span className="text-[21px] font-bold tabular-nums text-foreground/80">{dateTime}</span>
+    <span className="text-[21px] font-bold tabular-nums text-white">{dateTime}</span>
   )
 }
