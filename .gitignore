@@ -1,0 +1,16 @@
+# dependencies
+node_modules/
+
+# Next.js build output
+.next/
+out/
+
+# production build artefacts
+dist/
+
+# environment secrets — never commit
+.env.local
+.env*.local
+
+# OS
+.DS_Store
