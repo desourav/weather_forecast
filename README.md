@@ -77,7 +77,11 @@ nvm use
 ```bash
 git clone <your-repo-url> weather_forecast
 cd weather_forecast
-npm install
+
+# Use the Pi-specific install command so npm fetches linux/arm64 native binaries
+# (sharp, @next/swc-linux-arm64-gnu, @tailwindcss/oxide) instead of the macOS ones
+# baked into the lockfile.
+npm run install:pi
 ```
 
 ### 3 — Configure environment
