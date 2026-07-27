@@ -31,27 +31,27 @@ export function NewsPanel({ articles, loading }: Props) {
     <div className="w-full flex-1 bg-white/19 backdrop-blur-md backdrop-saturate-150 border border-white/30 rounded-2xl shadow-sm overflow-hidden flex flex-col">
       {/* Header */}
       <div className="px-4 pt-3 pb-2 border-b border-border/40 flex-shrink-0">
-        <p className="text-xs text-muted-foreground uppercase tracking-wide font-medium">Top News</p>
+        <p className="text-xs text-muted-foreground uppercase tracking-wide font-bold">Top News</p>
       </div>
 
       {/* Body: titles left (60%), image right (40%) */}
       <div className="flex flex-1 overflow-hidden">
 
         {/* Titles list — 60% of panel width */}
-        <div className="w-[60%] flex-shrink-0 overflow-y-auto">
+        <div className="w-[60%] flex-shrink-0 overflow-y-hidden flex flex-col">
           {loading || articles.length === 0
             ? [...Array(10)].map((_, i) => (
-                <div key={i} className="px-3 py-2 border-b border-border/40">
-                  <div className="h-4 bg-white/40 rounded animate-pulse" />
+                <div key={i} className="flex-1 min-h-0 px-3 py-2 border-b border-border/40 flex items-center">
+                  <div className="h-4 bg-white/40 rounded animate-pulse w-full" />
                 </div>
               ))
             : articles.slice(0, 20).map((article, i) => (
                 <div
                   key={i}
                   className={cn(
-                    'px-3 py-2 text-base rounded-lg mx-1 my-0.5 cursor-default transition-colors',
+                    'flex-1 min-h-0 px-3 py-1 text-base rounded-lg mx-1 my-0.5 cursor-default transition-colors font-bold flex items-center',
                     i === activeIndex
-                      ? 'bg-blue-500/15 text-blue-900 font-medium'
+                      ? 'bg-blue-500/15 text-blue-900'
                       : 'text-foreground hover:bg-muted/50'
                   )}
                 >
@@ -84,8 +84,8 @@ export function NewsPanel({ articles, loading }: Props) {
               ) : (
                 <div className="w-full h-36 bg-white/30 rounded-lg flex-shrink-0" />
               )}
-              <p className="text-[21px] font-medium text-foreground line-clamp-2 leading-snug">{active.title}</p>
-              <p className="text-[21px] text-muted-foreground line-clamp-5 leading-snug">{active.abstract}</p>
+              <p className="text-[21px] font-bold text-foreground line-clamp-2 leading-snug">{active.title}</p>
+              <p className="text-[21px] font-bold text-muted-foreground line-clamp-5 leading-snug">{active.abstract}</p>
             </div>
           )}
         </div>

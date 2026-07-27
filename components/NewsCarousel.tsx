@@ -28,7 +28,7 @@ export function NewsCarousel({ articles, loading }: Props) {
   return (
     <div className="bg-white/19 backdrop-blur-md backdrop-saturate-150 border border-white/30 rounded-2xl shadow-sm overflow-hidden">
       <div className="px-4 pt-4 pb-2 border-b border-border/40">
-        <p className="text-xs text-muted-foreground uppercase tracking-wide font-medium">News Spotlight</p>
+        <p className="text-xs text-muted-foreground uppercase tracking-wide font-bold">News Spotlight</p>
       </div>
       <div className="h-72 relative overflow-hidden">
         {loading || !article ? (
@@ -49,8 +49,8 @@ export function NewsCarousel({ articles, loading }: Props) {
                 className="object-cover w-full h-32 rounded-lg flex-shrink-0"
               />
             )}
-            <p className="text-sm font-medium text-foreground line-clamp-2">{article.title}</p>
-            <p className="text-sm text-muted-foreground line-clamp-4">{article.abstract}</p>
+            <p className="text-sm font-bold text-foreground line-clamp-2">{article.title}</p>
+            <p className="text-sm font-bold text-muted-foreground line-clamp-4">{article.abstract}</p>
           </div>
         )}
       </div>

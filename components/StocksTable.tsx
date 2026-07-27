@@ -20,14 +20,14 @@ export function StocksTable({ tickers, data, loading }: Props) {
   return (
     <div className="flex flex-col flex-1 min-h-0 bg-white/19 backdrop-blur-md backdrop-saturate-150 border border-white/30 rounded-2xl shadow-sm overflow-hidden">
       <div className="px-3 pt-2 pb-1 flex-shrink-0">
-        <p className="text-sm text-muted-foreground uppercase tracking-wide font-medium">Markets</p>
+        <p className="text-sm text-muted-foreground uppercase tracking-wide font-bold">Markets</p>
       </div>
       <div className="flex-1 min-h-0 overflow-hidden">
         <table className="w-auto border-separate border-spacing-0">
           <thead>
             <tr className="border-b border-border/40">
               {headers.map(h => (
-                <th key={h} className="px-2 py-1 text-left text-sm uppercase tracking-wide text-muted-foreground font-medium whitespace-nowrap">{h}</th>
+                <th key={h} className="px-2 py-1 text-left text-sm uppercase tracking-wide text-muted-foreground font-bold whitespace-nowrap">{h}</th>
               ))}
             </tr>
           </thead>
@@ -44,11 +44,11 @@ export function StocksTable({ tickers, data, loading }: Props) {
                 ))
               : data.map((quote, i) => (
                   <tr key={tickers[i]} className="border-b border-border/40 hover:bg-muted/50 transition-colors">
-                    <td className="px-2 py-1 text-[15px] font-medium text-foreground whitespace-nowrap">{tickers[i]}</td>
+                    <td className="px-2 py-1 text-[15px] font-bold text-foreground whitespace-nowrap">{tickers[i]}</td>
                     <td className="px-2 py-1 text-[15px] tabular-nums whitespace-nowrap">${quote.c?.toFixed(2)}</td>
                     <td className="px-2 py-1 text-[15px] tabular-nums whitespace-nowrap">{quote.d?.toFixed(2)}</td>
                     <td className="px-2 py-1">
-                      <span className={cn('inline-flex items-center rounded-full px-2 py-0.5 text-sm font-medium tabular-nums whitespace-nowrap', stockBadgeClass(quote.dp))}>
+                      <span className={cn('inline-flex items-center rounded-full px-2 py-0.5 text-sm font-bold tabular-nums whitespace-nowrap', stockBadgeClass(quote.dp))}>
                         {quote.dp?.toFixed(2)}%
                       </span>
                     </td>

@@ -70,7 +70,7 @@ export function StockTicker() {
               key={idx}
               className="inline-flex items-center gap-1.5 px-4 py-1.5 border-r border-white/10 text-[19.5px] font-mono"
             >
-              <span className="font-semibold text-white tracking-wide">{item.symbol}</span>
+              <span className="font-bold text-white tracking-wide">{item.symbol}</span>
 
               {loading ? (
                 <span className="w-16 h-3 rounded bg-white/20 animate-pulse inline-block" />

@@ -22,7 +22,7 @@ export function NewsList({ articles, loading }: Props) {
   return (
     <div className="w-full bg-white/19 backdrop-blur-md backdrop-saturate-150 border border-white/30 rounded-2xl shadow-sm overflow-hidden flex flex-col">
       <div className="px-4 pt-4 pb-2 border-b border-border/40">
-        <p className="text-xs text-muted-foreground uppercase tracking-wide font-medium">Top News</p>
+        <p className="text-xs text-muted-foreground uppercase tracking-wide font-bold">Top News</p>
       </div>
       <div className="overflow-y-auto max-h-[50vh]">
         {loading || articles.length === 0
@@ -35,9 +35,9 @@ export function NewsList({ articles, loading }: Props) {
               <div
                 key={i}
                 className={cn(
-                  'px-3 py-2 text-sm rounded-lg mx-1 my-0.5 cursor-default transition-colors',
+                  'px-3 py-2 text-sm rounded-lg mx-1 my-0.5 cursor-default transition-colors font-bold',
                   i === activeIndex
-                    ? 'bg-blue-500/15 text-blue-900 font-medium'
+                    ? 'bg-blue-500/15 text-blue-900'
                     : 'text-foreground hover:bg-muted/50'
                 )}
               >

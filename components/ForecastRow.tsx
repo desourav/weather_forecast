@@ -32,14 +32,14 @@ export function ForecastRow({ data, loading }: Props) {
           className="flex flex-col bg-white/19 backdrop-blur-md backdrop-saturate-150 border border-white/30 rounded-xl shadow-sm overflow-hidden"
         >
           <div className={cn('px-3 py-2', tempTint(Number(period.temperature)))}>
-            <p className="text-xs font-medium text-foreground truncate">{period.name}</p>
+            <p className="text-xs font-bold text-foreground truncate">{period.name}</p>
             <p className="text-[10px] text-muted-foreground">{period.startTime}</p>
           </div>
           <div className="flex flex-col flex-1 items-center p-2 gap-1.5">
             {period.icon && (
               <img src={period.icon} alt={period.shortForecast} width={129} height={129} className="rounded" />
             )}
-            <p className="text-sm font-semibold text-foreground">{period.temperature}°C</p>
+            <p className="text-sm font-bold text-foreground">{period.temperature}°C</p>
             <p className="text-xs text-muted-foreground text-center">{period.windSpeed}</p>
             <p className="text-xs text-muted-foreground text-center line-clamp-3">{period.shortForecast}</p>
           </div>

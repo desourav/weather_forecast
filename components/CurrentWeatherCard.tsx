@@ -33,8 +33,8 @@ export function CurrentWeatherCard({ data, loading }: Props) {
         <div className="flex flex-col gap-0 flex-1">
           {rows.map(({ label, value }) => (
             <div key={label} className="flex justify-between gap-2">
-              <span className="text-[19.5px] text-muted-foreground">{label}</span>
-              <span className="text-[19.5px] font-medium text-foreground tabular-nums whitespace-nowrap">{value}</span>
+              <span className="text-[19.5px] text-muted-foreground font-bold">{label}</span>
+              <span className="text-[19.5px] font-bold text-foreground tabular-nums whitespace-nowrap">{value}</span>
             </div>
           ))}
         </div>
